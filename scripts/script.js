@@ -1,117 +1,42 @@
-/* 
-    This script contains the functionality for rock, paper, scissors.
-*/
-
-/*
-    computerPlay 
-        Returns 'Rock', 'Paper', or 'Scissors' randomly
-*/
 function computerPlay() {
-    // Find a random value between 0 and 3 (exclusive)
-    let random_value = Math.floor(Math.random() * 3);
-
-    // Initialize array of options
-    const options = ['Rock', 'Paper', 'Scissors'];
-
-    // Return a random option
-    return options[random_value]
+    return Math.floor(Math.random() * 3);
 }
 
-/*
-    playRound
-        Takes two parameters:
-            playerSelection
-            computerSelection
-        Returns winner
-*/
+function convertMove(move) {
+    const moves = { rock: 2, paper: 1, scissors: 0 };
+    return moves[move.toLowerCase()]
+}
+
 function playRound(playerSelection, computerSelection) {
-    let winner = '';
-    playerSelection = playerSelection.toLowerCase();
-    computerSelection = computerSelection.toLowerCase();
+    const winning_combinations = ['20', '01', '12'];
+    const roundCombination = playerSelection.toString() + computerSelection.toString();
 
-    switch (playerSelection) {
-        /*
-            Rock ties with rock
-            Rock loses to paper
-            Rock beats scissors
-        */
-        case 'rock':
-            switch (computerSelection) {
-                case 'rock':
-                    winner = 'Tie';
-                    break;
-                case 'paper':
-                    winner = 'Computer';
-                    break;
-                case 'scissors':
-                    winner = 'Player';
-                    break;
-            }
-            break;
-        /*
-            Paper beats rock
-            Paper ties with paper
-            Paper loses to scissors
-        */
-        case 'paper':
-            switch (computerSelection) {
-                case 'rock':
-                    winner = 'Player';
-                    break;
-                case 'paper':
-                    winner = 'Tie';
-                    break;
-                case 'scissors':
-                    winner = 'Computer';
-                    break;
-            }
-            break;
-        /*
-            Scissors loses to rock
-            Scissors beats paper
-            Scissors ties with scissors
-        */
-        case 'scissors':
-            switch (computerSelection) {
-                case 'rock':
-                    winner = 'Computer';
-                    break;
-                case 'paper':
-                    winner = 'Player';
-                    break;
-                case 'scissors':
-                    winner = 'Tie';
-                    break;
-            }
-            break;
+    if (playerSelection === computerSelection) {
+        return 'Tie';
+    } else if (winning_combinations.indexOf(roundCombination) !== -1) {
+        return 'Player';
+    } else {
+        return 'Computer';
     }
-
-    return winner;
 }
 
-/*
-    game
-        Plays a five round game
-        Keeps score
-        Returns winner or loser at the end
-
-*/
 function game() {
-
+    const moves = ['Scissors', 'Paper', 'Rock']
     let playerWins = 0;
     let computerWins = 0;
 
     for (let i = 0; i < 5; i++) {
-        const playerSelection = prompt('Enter "Rock", "Paper", or "Scissors"!').toLowerCase();
-        const computerSelection = computerPlay().toLowerCase();
+        const playerSelection = convertMove(prompt('Enter "Rock", "Paper", or "Scissors"!'));
+        const computerSelection = computerPlay()
+
         let winner = playRound(playerSelection, computerSelection);
         let message = '';
         if (winner === 'Player') {
             playerWins++;
-            message = `You win because ${playerSelection} beats ${computerSelection}!`;
+            message = `You win because ${moves[playerSelection]} beats ${moves[computerSelection]}!`;
         } else if (winner === 'Computer') {
             computerWins++;
-            message = `You lose because ${computerSelection} beats ${playerSelection}!`;
+            message = `You lose because ${moves[computerSelection]} beats ${moves[playerSelection]}!`;
         } else {
             message = `Tie!`;
         }

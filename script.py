@@ -1,5 +1,6 @@
 import random
 import math
+
 def moveValue(move):
     moves = {'Rock': 2, 'Paper': 1, 'Scissors':0}
     return moves[move]
