@@ -5,10 +5,31 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
         <title>Rock, Paper, Scissors</title>
     </head>
 
     <body>
+        <header>
+            <h1>ROCK, PAPER, SCISSORS</h1>
+        </header>
+        <section>
+            <img src="images/rock.jpg" id="2">
+            <img src="images/paper.png" id="1">
+            <img src="images/scissors.jpg" id="0">
+            <h2 class="hidden" id="play-again">Play Again!</h2>
+        </section>
+        <section>
+            <h2 class="hidden" id="round-winner">Round Winner</h2>
+            <span id="round"></span>
+
+            <h2 class="hidden" id="score">Score</h2>
+            <span id="computer"></span>
+            <span id="player"></span>
+
+            <h2 class="hidden" id="game-winner">Game Winner</h2>
+            <span id="game"></span>
+        </section>
 
         <script src="scripts/script.js"></script>
     </body>
